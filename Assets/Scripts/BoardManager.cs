@@ -1,57 +1,45 @@
 ﻿using UnityEngine;
 public class BoardManager : MonoBehaviour
 {
+    public float[] angle;
+    private GameObject _grass;
     private void OnMouseDown()
     {
-        RayCastDetectUp();
-        RayCastDetectDown();
-        RayCastDetectLeft();
-        RayCastDetectRight();
+        GetAllAdjacentTiles();
     }
 
-    private void RayCastDetectUp()
+    private void GetAdjacent(Vector2 castDir)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up,20f);
-
-        if (hit)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, castDir);
+        if (hit.collider != null)
         {
-            Debug.Log("We hit " + hit.collider.name);
-            Debug.DrawRay(transform.position, Vector2.up, Color.red, 25f);
+
+            Debug.DrawRay(transform.position, castDir * 0.6f, Color.magenta, 25f);
         }
     }
 
-    private void RayCastDetectDown()
+    private void GetRowColumn(Vector2 castDir)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down,20f);
-
-        if (hit)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, castDir);
+        if (hit.collider != null)
         {
-            Debug.Log("We hit " + hit.collider.name);
-            Debug.DrawRay(transform.position, Vector2.down, Color.blue, 25f);
+            Debug.DrawRay(transform.position, castDir * 2f, Color.red, 25f);
         }
     }
 
-    private void RayCastDetectLeft()
+    private void GetAllAdjacentTiles()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left,20f);
-
-        if (hit)
+        for (int i = 0; i < 8; i++)
         {
-            Debug.Log("We hit " + hit.collider.name);
-            Debug.DrawRay(transform.position, Vector2.left, Color.black, 25f);
+            Vector2 direction = new Vector2(Mathf.Cos(angle[i] * Mathf.Deg2Rad), Mathf.Sin(angle[i] * Mathf.Deg2Rad)).normalized;
+            GetAdjacent(direction);
+        }
+
+        for (int i = 0; i < 8; i += 2)
+        {
+            Vector2 direction = new Vector2(Mathf.Cos(angle[i] * Mathf.Deg2Rad), Mathf.Sin(angle[i] * Mathf.Deg2Rad)).normalized;
+            GetRowColumn(direction);
         }
     }
 
-    private void RayCastDetectRight()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right,20f);
-
-        if (hit)
-        {
-            Debug.Log("We hit " + hit.collider.name);
-            Debug.DrawRay(transform.position, Vector2.right, Color.magenta, 25f);
-        }
-    }
-    
-    
 }

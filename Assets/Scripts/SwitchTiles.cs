@@ -1,18 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SwitchTiles : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Sprite grass, shop;
+    private SpriteRenderer _spriteRenderer; 
+    void Start ()
     {
-        
+        _spriteRenderer = GetComponent<SpriteRenderer>(); 
+        if (_spriteRenderer.sprite == null)
+            _spriteRenderer.sprite = grass;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseDown()
     {
-        
+        if (_spriteRenderer.sprite == grass)
+        {
+            _spriteRenderer.sprite = shop;
+        } 
+        else
+        {
+            _spriteRenderer.sprite = grass;
+        }
     }
 }
