@@ -13,13 +13,6 @@ public class SwitchTiles : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (_spriteRenderer.sprite == grass)
-        {
-            _spriteRenderer.sprite = shop;
-        } 
-        else
-        {
-            _spriteRenderer.sprite = grass;
-        }
+        _spriteRenderer.sprite = _spriteRenderer.sprite == grass ? shop : grass;
     }
 }

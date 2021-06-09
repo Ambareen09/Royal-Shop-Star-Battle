@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43a4f04703410e48a56ad0f7770d093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grass: {fileID: 21300000, guid: 1e5132bea9a739a46aa3634a4146686a, type: 3}
+  shop: {fileID: 21300000, guid: 2ee2734aea52b4b4d8fe0b52787d3fec, type: 3}
   angle:
   - 150
   - 175
