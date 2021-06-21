@@ -2,8 +2,8 @@
 using UnityEngine;
 public class RaycastToTiles : MonoBehaviour
 {
-    private readonly int[] _angle = {30,210,150, 340};
-    protected RaycastHit2D[] GetRow()
+    private readonly int[] _angle = {30,205,150, 335};
+    protected bool GetRow()
     {
         var direction1 = new Vector2(Mathf.Cos(_angle[0] * Mathf.Deg2Rad), Mathf.Sin(_angle[0] * Mathf.Deg2Rad)).normalized; //UpperRow
         var direction2 = new Vector2(Mathf.Cos(_angle[1] * Mathf.Deg2Rad), Mathf.Sin(_angle[1] * Mathf.Deg2Rad)).normalized; //LowerRow
@@ -14,18 +14,14 @@ public class RaycastToTiles : MonoBehaviour
         var hit1 = Physics2D.RaycastAll(position, direction1, 2f);
         // ReSharper disable once Unity.PreferNonAllocApi
         var hit2 = Physics2D.RaycastAll(position, direction2, 2f);
-
-        for (var i = hit1.Length - 1; i >= 0; i--)
+        var hit = hit1.Concat(hit2).ToArray();
+        foreach (var t in hit)
         {
-            Debug.Log(hit1[i].collider.name + " " + hit1[i].collider.gameObject);
+            if (t.collider.gameObject.CompareTag("Shop")) 
+                return false;
         }
-        
-        for (var i = hit2.Length - 1; i >= 0; i--)
-        {
-            Debug.Log(hit2[i].collider.name + " " + hit2[i].collider.gameObject);
-        }
-        return hit1.Concat(hit2).ToArray();
-    }
+        return true;
+    } 
 
     protected RaycastHit2D[] GetColumn()
     {
@@ -38,16 +34,6 @@ public class RaycastToTiles : MonoBehaviour
         var hit1 = Physics2D.RaycastAll(position, direction3, 2f);
         // ReSharper disable once Unity.PreferNonAllocApi
         var hit2 = Physics2D.RaycastAll(position, direction4, 2f);
-
-        for (var i = hit1.Length - 1; i >= 0; i--)
-        {
-            Debug.Log(hit1[i].collider.name + " " + hit1[i].collider.gameObject);
-        }
-        
-        for (var i = hit2.Length - 1; i >= 0; i--)
-        {
-            Debug.Log(hit2[i].collider.name + " " + hit2[i].collider.gameObject);
-        }
         return hit1.Concat(hit2).ToArray();
     }
 
@@ -59,32 +45,14 @@ public class RaycastToTiles : MonoBehaviour
         // ReSharper disable once Unity.PreferNonAllocApi
         var hit1 = Physics2D.RaycastAll(position, Vector2.up, 0.4f);
         // ReSharper disable once Unity.PreferNonAllocApi
-        var hit2 = Physics2D.RaycastAll(position, Vector2.down, 0.6f);
-        Debug.DrawRay(position, Vector2.left*0.6f, Color.black, 25f);
-        Debug.DrawRay(position, Vector2.right*0.6f, Color.black, 25f);
+        var hit2 = Physics2D.RaycastAll(position, Vector2.down, 0.4f);
+        Debug.DrawRay(position, Vector2.left*0.8f, Color.black, 25f);
+        Debug.DrawRay(position, Vector2.right*0.8f, Color.black, 25f);
         // ReSharper disable once Unity.PreferNonAllocApi
-        var hit3 = Physics2D.RaycastAll(position, Vector2.left, 0.6f);
+        var hit3 = Physics2D.RaycastAll(position, Vector2.left, 0.8f);
         // ReSharper disable once Unity.PreferNonAllocApi
-        var hit4 = Physics2D.RaycastAll(position, Vector2.right, 0.6f);
-
-        for (var i = hit1.Length - 1; i >= 0; i--)
-        {
-            Debug.Log(hit1[i].collider.name + " " + hit1[i].collider.gameObject);
-        }
+        var hit4 = Physics2D.RaycastAll(position, Vector2.right, 0.8f);
         
-        for (var i = hit2.Length - 1; i >= 0; i--)
-        {
-            Debug.Log(hit2[i].collider.name + " " + hit2[i].collider.gameObject);
-        }
-        
-        for (var i = hit3.Length - 1; i >= 0; i--)
-        {
-            Debug.Log(hit3[i].collider.name + " " + hit3[i].collider.gameObject);
-        }
-        for (var i = hit4.Length - 1; i >= 0; i--)
-        {
-            Debug.Log(hit4[i].collider.name + " " + hit4[i].collider.gameObject);
-        }
         return hit1.Concat(hit2).Concat(hit3).Concat(hit4).ToArray();
     }
 }

@@ -324,7 +324,7 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 5503134948756021778, guid: b3426cff2934fc04e9b09c4ee71608d3, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: b3426cff2934fc04e9b09c4ee71608d3, type: 3}
 --- !u!1001 &178092326
 PrefabInstance:
@@ -397,21 +397,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5503134948756021778, guid: b3426cff2934fc04e9b09c4ee71608d3,
-        type: 3}
-      propertyPath: angle.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5503134948756021778, guid: b3426cff2934fc04e9b09c4ee71608d3,
-        type: 3}
-      propertyPath: angle.Array.data[2]
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5503134948756021778, guid: b3426cff2934fc04e9b09c4ee71608d3,
-        type: 3}
-      propertyPath: angle.Array.data[3]
-      value: 255
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3426cff2934fc04e9b09c4ee71608d3, type: 3}
@@ -3085,11 +3070,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5503134948756021778, guid: b3426cff2934fc04e9b09c4ee71608d3,
-        type: 3}
-      propertyPath: adjacentDirections.Array.size
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8330996333258844597, guid: b3426cff2934fc04e9b09c4ee71608d3,
         type: 3}
