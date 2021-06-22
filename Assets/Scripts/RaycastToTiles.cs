@@ -23,7 +23,7 @@ public class RaycastToTiles : MonoBehaviour
         return true;
     } 
 
-    protected RaycastHit2D[] GetColumn()
+    protected bool GetColumn()
     {
         var direction3 = new Vector2(Mathf.Cos(_angle[2] * Mathf.Deg2Rad), Mathf.Sin(_angle[2] * Mathf.Deg2Rad)).normalized; //UpperColumn
         var direction4 = new Vector2(Mathf.Cos(_angle[3] * Mathf.Deg2Rad), Mathf.Sin(_angle[3] * Mathf.Deg2Rad)).normalized; //LowerColumn
@@ -34,10 +34,16 @@ public class RaycastToTiles : MonoBehaviour
         var hit1 = Physics2D.RaycastAll(position, direction3, 2f);
         // ReSharper disable once Unity.PreferNonAllocApi
         var hit2 = Physics2D.RaycastAll(position, direction4, 2f);
-        return hit1.Concat(hit2).ToArray();
+        var hit = hit1.Concat(hit2).ToArray();
+        foreach (var t in hit)
+        {
+            if (t.collider.gameObject.CompareTag("Shop")) 
+                return false;
+        }
+        return true;
     }
 
-    protected RaycastHit2D[] GetDiagonalAdjacent()
+    protected bool GetDiagonalAdjacent()
     {
         var position = transform.position;
         Debug.DrawRay(position, Vector2.up*0.4f, Color.black, 25f);
@@ -53,6 +59,12 @@ public class RaycastToTiles : MonoBehaviour
         // ReSharper disable once Unity.PreferNonAllocApi
         var hit4 = Physics2D.RaycastAll(position, Vector2.right, 0.8f);
         
-        return hit1.Concat(hit2).Concat(hit3).Concat(hit4).ToArray();
+        var hit = hit1.Concat(hit2).Concat(hit3).Concat(hit4).ToArray();
+        foreach (var t in hit)
+        {
+            if (t.collider.gameObject.CompareTag("Shop")) 
+                return false;
+        }
+        return true;
     }
 }
