@@ -20,7 +20,7 @@ public class SwitchTiles : RaycastToTiles
         if (_spriteRenderer.sprite == grass)
         {
             gameObject.tag = "Shop";
-            _spriteRenderer.sprite = GetDiagonalAdjacent() && GetRow() && GetColumn()? shop : incorrectShop;
+            _spriteRenderer.sprite = (GetDiagonalAdjacent() && GetRow() && GetColumn())? shop : incorrectShop;
         } 
         else
         {
