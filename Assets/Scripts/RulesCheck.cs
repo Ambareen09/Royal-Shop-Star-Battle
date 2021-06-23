@@ -1,18 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RulesCheck : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int[] blocks;
+    public bool CheckBlock(int blockId)
     {
-        
+        return blocks[blockId] == 1;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void IncreaseStore(int blockId)
     {
-        
+        blocks[blockId] += 1;
+    }
+    
+    public void DecreaseStore(int blockId)
+    {
+        blocks[blockId] -= 1;
     }
 }
