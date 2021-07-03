@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Grass
   - Shop
+  - Music
   layers:
   - Default
   - TransparentFX

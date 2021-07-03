@@ -1,22 +1,20 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelHandler : MonoBehaviour
 {
-    public Image locked;
-    public Text unlocked;
     public Button[] levelButtons;
     private int _levelAt;
 
     public void Start()
     {
+        
         _levelAt = PlayerPrefs.GetInt("levelAt", 1);
-        UnlockLevel();
+        LockUnlockLevel();
     }
 
-    private void UnlockLevel()
+    private void LockUnlockLevel()
     {
         for (var i = 0; i < levelButtons.Length; i++)
         {
