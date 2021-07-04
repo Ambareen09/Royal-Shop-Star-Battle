@@ -18,7 +18,10 @@ public class RaycastToTiles : MonoBehaviour
         foreach (var t in hit)
         {
             if (t.collider.gameObject.CompareTag("Shop")) 
+            {
+                t.collider.gameObject.GetComponent<SpriteRenderer>().sprite = GetComponent<SwitchTiles>().incorrectShop;
                 return false;
+            }
         }
         return true;
     } 
@@ -37,8 +40,12 @@ public class RaycastToTiles : MonoBehaviour
         var hit = hit1.Concat(hit2).ToArray();
         foreach (var t in hit)
         {
-            if (t.collider.gameObject.CompareTag("Shop")) 
+            if (t.collider.gameObject.CompareTag("Shop"))
+            {
+                t.collider.gameObject.GetComponent<SpriteRenderer>().sprite = GetComponent<SwitchTiles>().incorrectShop;
                 return false;
+            }
+               
         }
         return true;
     }
@@ -62,8 +69,11 @@ public class RaycastToTiles : MonoBehaviour
         var hit = hit1.Concat(hit2).Concat(hit3).Concat(hit4).ToArray();
         foreach (var t in hit)
         {
-            if (t.collider.gameObject.CompareTag("Shop")) 
+            if (t.collider.gameObject.CompareTag("Shop"))
+            {
+                t.collider.gameObject.GetComponent<SpriteRenderer>().sprite = GetComponent<SwitchTiles>().incorrectShop;
                 return false;
+            }
         }
         return true;
     }

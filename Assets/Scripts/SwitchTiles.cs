@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 public class SwitchTiles : RaycastToTiles
 {
+    
     public int blockId;
     public Sprite grass, shop, incorrectShop;
     private SpriteRenderer _spriteRenderer;
@@ -14,12 +16,15 @@ public class SwitchTiles : RaycastToTiles
     private void OnMouseDown()
     {
         ChangeSprite();
+        
+
     }
 
     private void ChangeSprite()
     {
         if (_spriteRenderer.sprite == grass)
         {
+            GetComponentInParent<MovesCounter>().MovesLeft();
             gameObject.tag = "Shop";
             GetComponentInParent<RulesCheck>().IncreaseStore(blockId);
             _spriteRenderer.sprite = (GetDiagonalAdjacent() && GetRow() && GetColumn() && GetComponentInParent<RulesCheck>().CheckBlock(blockId))? shop : incorrectShop;
@@ -31,4 +36,6 @@ public class SwitchTiles : RaycastToTiles
             GetComponentInParent<RulesCheck>().DecreaseStore(blockId);
         }
     }
+
+    
 }

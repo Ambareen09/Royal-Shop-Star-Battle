@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a45559ef689c64bb9047c9ef166daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grass: {fileID: 21300000, guid: 1e5132bea9a739a46aa3634a4146686a, type: 3}
-  shop: {fileID: 21300000, guid: 2ee2734aea52b4b4d8fe0b52787d3fec, type: 3}
+  blockId: 0
+  grass: {fileID: 0}
+  shop: {fileID: 0}
   incorrectShop: {fileID: 21300000, guid: 8b84a868012db6345a09c2f55a14e63e, type: 3}

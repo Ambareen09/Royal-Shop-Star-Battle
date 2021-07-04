@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour
     {
         if (BgInstance != null && BgInstance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             return;
         }
         BgInstance = this;
