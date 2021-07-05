@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RulesCheck : MonoBehaviour
 {
     public int[] blocks;
-    public List<GameObject>[] FilledBlock = new List<GameObject>[5];
+    public List<GameObject>[] FilledBlock = Enumerable.Range(0,5).Select((i)=>new List<GameObject>()).ToArray();
 
     public bool CheckBlock(int blockId)
     {
