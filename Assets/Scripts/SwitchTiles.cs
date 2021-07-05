@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 public class SwitchTiles : RaycastToTiles
 {
     
@@ -16,8 +17,6 @@ public class SwitchTiles : RaycastToTiles
     private void OnMouseDown()
     {
         ChangeSprite();
-        
-
     }
 
     private void ChangeSprite()
@@ -27,7 +26,29 @@ public class SwitchTiles : RaycastToTiles
             GetComponentInParent<MovesCounter>().MovesLeft();
             gameObject.tag = "Shop";
             GetComponentInParent<RulesCheck>().IncreaseStore(blockId);
-            _spriteRenderer.sprite = (GetDiagonalAdjacent() && GetRow() && GetColumn() && GetComponentInParent<RulesCheck>().CheckBlock(blockId))? shop : incorrectShop;
+            GetComponentInParent<RulesCheck>().FilledBlock[blockId].Append(gameObject);
+            Debug.Log(GetComponentInParent<RulesCheck>().FilledBlock[blockId]);
+            Debug.Log(gameObject);
+            //_spriteRenderer.sprite = (GetDiagonalAdjacent() && GetRow() && GetColumn() && GetComponentInParent<RulesCheck>().CheckBlock(blockId))? shop : incorrectShop;
+            if (GetDiagonalAdjacent() && GetRow() && GetColumn())
+            {
+                if(GetComponentInParent<RulesCheck>().CheckBlock(blockId))
+                {
+                    GetComponentInParent<RulesCheck>().FilledBlock[blockId][0].GetComponent<SpriteRenderer>().sprite = shop;
+                    _spriteRenderer.sprite = shop;
+                } 
+                else
+                {
+                    for (int i = 0; i < GetComponentInParent<RulesCheck>().FilledBlock[blockId].Count; i++)
+                    {
+                        GetComponentInParent<RulesCheck>().FilledBlock[blockId][i].GetComponent<SpriteRenderer>().sprite = incorrectShop;
+                    }
+                    
+                }
+                
+            }
+            _spriteRenderer.sprite = incorrectShop;
+
         } 
         else
         {
@@ -36,6 +57,4 @@ public class SwitchTiles : RaycastToTiles
             GetComponentInParent<RulesCheck>().DecreaseStore(blockId);
         }
     }
-
-    
 }
