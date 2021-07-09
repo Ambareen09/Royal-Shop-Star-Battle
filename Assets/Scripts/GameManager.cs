@@ -11,6 +11,14 @@ public class GameManager : MonoBehaviour
     {
         nextScene = SceneManager.GetActiveScene().buildIndex + 1;
     }
+    private void Update()
+    {
+        if (Application.platform != RuntimePlatform.Android)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
     public void WintoNextLevel()
     {
         SceneManager.LoadScene(nextScene);
