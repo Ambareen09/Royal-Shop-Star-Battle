@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private MovesCounter movesCounter;
     public int nextScene;
-    public GameObject gameOverpanel;
+    public GameObject levelFailedPanel;
+    public GameObject pausePanel;
+    public GameObject[] gamebuttons;
+    public Text lvlNo;
     public void Start()
     {
         nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        LevelNo();
     }
     private void Update()
     {
@@ -36,7 +41,33 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0f;
-        gameOverpanel.SetActive(true);
+        levelFailedPanel.SetActive(true);
         movesCounter.moves.gameObject.SetActive(false);
+        gamebuttons[0].SetActive(false);
+        gamebuttons[1].SetActive(false);
+        
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void LevelNo()
+    {
+        lvlNo.text = "Level\n" + (nextScene - 1);
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+        pausePanel.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1f;
+        pausePanel.SetActive(false);
     }
 }
+
