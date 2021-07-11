@@ -39,31 +39,27 @@ public class RaycastToTiles : MonoBehaviour
         return (from a in hit select a.collider.gameObject).ToList();
     }
 
-    protected bool GetDiagonalAdjacent()
+    protected List<GameObject> GetDiagonalAdjacent()
     {
         var position = transform.position;
         Debug.DrawRay(position, Vector2.up*0.4f, Color.black, 25f);
         Debug.DrawRay(position, Vector2.down*0.4f, Color.black, 25f);
         // ReSharper disable once Unity.PreferNonAllocApi
-        var hit1 = Physics2D.RaycastAll(position, Vector2.up, 0.4f);
+        var hit1 = Physics2D.RaycastAll(position, Vector2.up, 0.4f, mask);
         // ReSharper disable once Unity.PreferNonAllocApi
-        var hit2 = Physics2D.RaycastAll(position, Vector2.down, 0.4f);
+        var hit2 = Physics2D.RaycastAll(position, Vector2.down, 0.4f, mask);
         Debug.DrawRay(position, Vector2.left*0.8f, Color.black, 25f);
         Debug.DrawRay(position, Vector2.right*0.8f, Color.black, 25f);
         // ReSharper disable once Unity.PreferNonAllocApi
-        var hit3 = Physics2D.RaycastAll(position, Vector2.left, 0.8f);
+        var hit3 = Physics2D.RaycastAll(position, Vector2.left, 0.8f, mask);
         // ReSharper disable once Unity.PreferNonAllocApi
-        var hit4 = Physics2D.RaycastAll(position, Vector2.right, 0.8f);
+        var hit4 = Physics2D.RaycastAll(position, Vector2.right, 0.8f, mask);
         
         var hit = hit1.Concat(hit2).Concat(hit3).Concat(hit4).ToArray();
         foreach (var t in hit)
         {
-            if (t.collider.gameObject.CompareTag("Shop"))
-            {
-                t.collider.gameObject.GetComponent<SpriteRenderer>().sprite = GetComponent<SwitchTiles>().incorrectShop;
-                return false;
-            }
+            t.collider.gameObject.GetComponent<SpriteRenderer>().sprite = GetComponent<SwitchTiles>().incorrectShop;
         }
-        return true;
+        return (from a in hit select a.collider.gameObject).ToList();
     }
 }

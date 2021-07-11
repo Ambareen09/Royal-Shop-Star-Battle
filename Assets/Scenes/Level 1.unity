@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moves: {fileID: 496953197}
-  movesLeft: 5
+  movesLeft: 100
   gameManager: {fileID: 1096819686}
 --- !u!4 &61153144 stripped
 Transform:

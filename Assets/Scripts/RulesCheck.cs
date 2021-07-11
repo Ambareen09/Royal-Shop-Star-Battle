@@ -12,8 +12,9 @@ public class RulesCheck : MonoBehaviour
         return blocks[blockId] == 1;
     }
 
-    public void IncreaseStore(int blockId)
+    public void IncreaseStore(int blockId, GameObject shop)
     {
+        FilledBlock[blockId].Add(shop);
         blocks[blockId] += 1;
     }
     
