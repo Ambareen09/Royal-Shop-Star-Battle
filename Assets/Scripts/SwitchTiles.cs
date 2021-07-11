@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 public class SwitchTiles : RaycastToTiles
 {
@@ -33,7 +34,7 @@ public class SwitchTiles : RaycastToTiles
             _movesCounter.MovesLeft();
             _rulesCheck.IncreaseStore(blockId);
             _rulesCheck.FilledBlock[blockId].Add(gameObject);
-            _spriteRenderer.sprite = GetDiagonalAdjacent() && GetColumn().Length == 0 && GetRow().Length == 0 
+            _spriteRenderer.sprite = GetDiagonalAdjacent() && GetColumn().Count == 0 && GetRow().Count == 0 
                                      && _rulesCheck.CheckBlock(blockId) ? shop : incorrectShop;
         }
         else
@@ -41,14 +42,16 @@ public class SwitchTiles : RaycastToTiles
             var o = gameObject;
             o.tag = "Grass";
             o.layer = 9;
-            foreach (var hit in GetRow().Concat(GetColumn()))
-            {
-                hit.collider.gameObject.GetComponent<SwitchTiles>().ChangeSprite();
-                hit.collider.gameObject.GetComponent<SwitchTiles>().ChangeSprite();
-            }
             _rulesCheck.DecreaseStore(blockId, o);
-            if (_rulesCheck.CheckBlock(blockId))
-                 _rulesCheck.FilledBlock[blockId][0].GetComponent<SpriteRenderer>().sprite = shop;
+            var tbc = GetRow();
+            tbc.AddRange(GetColumn());
+            tbc.AddRange(_rulesCheck.CheckBlock(blockId) ? _rulesCheck.FilledBlock[blockId] : new List<GameObject>() { });
+            foreach (var hit in tbc)
+            {
+                hit.GetComponent<SwitchTiles>().ChangeSprite();
+                hit.GetComponent<SwitchTiles>().ChangeSprite();
+            }
+
             _spriteRenderer.sprite = grass;
             
         }

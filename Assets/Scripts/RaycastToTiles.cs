@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 public class RaycastToTiles : MonoBehaviour
 {
     private readonly int[] _angle = {30,205,150, 335};
     public LayerMask mask;
-    protected RaycastHit2D[] GetRow()
+    protected List<GameObject> GetRow()
     {
         var direction1 = new Vector2(Mathf.Cos(_angle[0] * Mathf.Deg2Rad), Mathf.Sin(_angle[0] * Mathf.Deg2Rad)).normalized; //UpperRow
         var direction2 = new Vector2(Mathf.Cos(_angle[1] * Mathf.Deg2Rad), Mathf.Sin(_angle[1] * Mathf.Deg2Rad)).normalized; //LowerRow
@@ -18,10 +19,10 @@ public class RaycastToTiles : MonoBehaviour
         {
             t.collider.gameObject.GetComponent<SpriteRenderer>().sprite = GetComponent<SwitchTiles>().incorrectShop;
         }
-        return hit;
+        return (from a in hit select a.collider.gameObject).ToList();
     } 
 
-    protected RaycastHit2D[] GetColumn()
+    protected List<GameObject> GetColumn()
     {
         var direction3 = new Vector2(Mathf.Cos(_angle[2] * Mathf.Deg2Rad), Mathf.Sin(_angle[2] * Mathf.Deg2Rad)).normalized; //UpperColumn
         var direction4 = new Vector2(Mathf.Cos(_angle[3] * Mathf.Deg2Rad), Mathf.Sin(_angle[3] * Mathf.Deg2Rad)).normalized; //LowerColumn
@@ -35,7 +36,7 @@ public class RaycastToTiles : MonoBehaviour
         {
             t.collider.gameObject.GetComponent<SpriteRenderer>().sprite = GetComponent<SwitchTiles>().incorrectShop;
         }
-        return hit;
+        return (from a in hit select a.collider.gameObject).ToList();
     }
 
     protected bool GetDiagonalAdjacent()
