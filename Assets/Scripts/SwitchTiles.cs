@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 public class SwitchTiles : RaycastToTiles
 {
     
@@ -32,7 +33,7 @@ public class SwitchTiles : RaycastToTiles
             _movesCounter.MovesLeft();
             _rulesCheck.IncreaseStore(blockId);
             _rulesCheck.FilledBlock[blockId].Add(gameObject);
-            _spriteRenderer.sprite = GetDiagonalAdjacent() && GetColumn() && GetRow() 
+            _spriteRenderer.sprite = GetDiagonalAdjacent() && GetColumn().Length == 0 && GetRow().Length == 0 
                                      && _rulesCheck.CheckBlock(blockId) ? shop : incorrectShop;
         }
         else
@@ -40,12 +41,15 @@ public class SwitchTiles : RaycastToTiles
             var o = gameObject;
             o.tag = "Grass";
             o.layer = 9;
-            // ReSharper disable once Unity.InefficientPropertyAccess
-            _rulesCheck.FilledBlock[blockId].Remove(o);
-             if (_rulesCheck.FilledBlock[blockId].Count == 1)
+            foreach (var hit in GetRow().Concat(GetColumn()))
+            {
+                hit.collider.gameObject.GetComponent<SwitchTiles>().ChangeSprite();
+                hit.collider.gameObject.GetComponent<SwitchTiles>().ChangeSprite();
+            }
+            _rulesCheck.DecreaseStore(blockId, o);
+            if (_rulesCheck.CheckBlock(blockId))
                  _rulesCheck.FilledBlock[blockId][0].GetComponent<SpriteRenderer>().sprite = shop;
-             _spriteRenderer.sprite = grass;
-            _rulesCheck.DecreaseStore(blockId);
+            _spriteRenderer.sprite = grass;
             
         }
     }

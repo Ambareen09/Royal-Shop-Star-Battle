@@ -17,8 +17,9 @@ public class RulesCheck : MonoBehaviour
         blocks[blockId] += 1;
     }
     
-    public void DecreaseStore(int blockId)
+    public void DecreaseStore(int blockId, GameObject shop)
     {
+        FilledBlock[blockId].Remove(shop);
         blocks[blockId] -= 1;
     }
 }

@@ -4,7 +4,7 @@ public class RaycastToTiles : MonoBehaviour
 {
     private readonly int[] _angle = {30,205,150, 335};
     public LayerMask mask;
-    protected bool GetRow()
+    protected RaycastHit2D[] GetRow()
     {
         var direction1 = new Vector2(Mathf.Cos(_angle[0] * Mathf.Deg2Rad), Mathf.Sin(_angle[0] * Mathf.Deg2Rad)).normalized; //UpperRow
         var direction2 = new Vector2(Mathf.Cos(_angle[1] * Mathf.Deg2Rad), Mathf.Sin(_angle[1] * Mathf.Deg2Rad)).normalized; //LowerRow
@@ -18,10 +18,10 @@ public class RaycastToTiles : MonoBehaviour
         {
             t.collider.gameObject.GetComponent<SpriteRenderer>().sprite = GetComponent<SwitchTiles>().incorrectShop;
         }
-        return hit.Length == 0;
+        return hit;
     } 
 
-    protected bool GetColumn()
+    protected RaycastHit2D[] GetColumn()
     {
         var direction3 = new Vector2(Mathf.Cos(_angle[2] * Mathf.Deg2Rad), Mathf.Sin(_angle[2] * Mathf.Deg2Rad)).normalized; //UpperColumn
         var direction4 = new Vector2(Mathf.Cos(_angle[3] * Mathf.Deg2Rad), Mathf.Sin(_angle[3] * Mathf.Deg2Rad)).normalized; //LowerColumn
@@ -35,7 +35,7 @@ public class RaycastToTiles : MonoBehaviour
         {
             t.collider.gameObject.GetComponent<SpriteRenderer>().sprite = GetComponent<SwitchTiles>().incorrectShop;
         }
-        return hit.Length == 0;
+        return hit;
     }
 
     protected bool GetDiagonalAdjacent()
