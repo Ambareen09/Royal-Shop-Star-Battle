@@ -3431,7 +3431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movesCounter: {fileID: 20403}
   nextScene: 0
-  levelFailedPanel: {fileID: 0}
+  levelFailedPanel: {fileID: 237076176}
   pausePanel: {fileID: 251409489}
   gamebuttons:
   - {fileID: 2094636565}

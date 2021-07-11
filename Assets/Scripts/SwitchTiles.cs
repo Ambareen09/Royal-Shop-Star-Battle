@@ -32,32 +32,9 @@ public class SwitchTiles : RaycastToTiles
             _movesCounter.MovesLeft();
             _rulesCheck.IncreaseStore(blockId);
             _rulesCheck.FilledBlock[blockId].Add(gameObject);
-
-            if( GetDiagonalAdjacent() && GetRow() && GetColumn() && _rulesCheck.CheckBlock(blockId))
-            {
-                _spriteRenderer.sprite = shop;
-            } 
-                
-            else if(!(GetDiagonalAdjacent() || GetRow() || GetColumn()))
-            {
-                    
-                _spriteRenderer.sprite = incorrectShop;
-            }
-                
-            else if (!_rulesCheck.CheckBlock(blockId))
-            {
-                for (int i = 0; i < _rulesCheck.FilledBlock[blockId].Count; i++)
-                {
-                    _rulesCheck.FilledBlock[blockId][i].GetComponent<SpriteRenderer>().sprite = incorrectShop;
-                }  
-                _spriteRenderer.sprite = incorrectShop;
-            }
-            else if (!(GetDiagonalAdjacent() && GetRow() && GetColumn() && _rulesCheck.CheckBlock(blockId)))
-            {
-                _spriteRenderer.sprite = incorrectShop;
-            }
-
-        } 
+            _spriteRenderer.sprite = GetDiagonalAdjacent() && GetColumn() && GetRow() 
+                                     && _rulesCheck.CheckBlock(blockId) ? shop : incorrectShop;
+        }
         else
         {
             var o = gameObject;
