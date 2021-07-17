@@ -22,6 +22,7 @@ public class SwitchTiles : RaycastToTiles
     private void OnMouseDown()
     {
         ChangeSprite();
+        CountMoves();
     }
 
     private void ChangeSprite()
@@ -31,8 +32,7 @@ public class SwitchTiles : RaycastToTiles
             var o = gameObject;
             o.tag = "Shop";
             o.layer = 8;
-            _movesCounter.MovesLeft();
-            _rulesCheck.IncreaseStore(blockId, gameObject);
+            _rulesCheck.IncreaseStore(blockId, o);
             bool[] acrb = new bool[4];
             List<GameObject> tbc = new List<GameObject>();
             
@@ -52,11 +52,23 @@ public class SwitchTiles : RaycastToTiles
             acrb[3] = _rulesCheck.CheckBlock(blockId);
             tbc.AddRange(temp);
 
-            _spriteRenderer.sprite = acrb[0] && acrb[1] && acrb[2] && acrb[3] ? shop : incorrectShop;
+           // _spriteRenderer.sprite = acrb[0] && acrb[1] && acrb[2] && acrb[3] ? shop : incorrectShop;
+            if (acrb[0] && acrb[1] && acrb[2] && acrb[3])
+            {
+                o.tag = "CorrectShop";
+                _spriteRenderer.sprite = shop;
+               //_rulesCheck.CheckforGameWon();
+                
+            } 
+            else
+            {
+                _spriteRenderer.sprite = incorrectShop;
+            }
 
             foreach (var hit in tbc)
             {
                 hit.GetComponent<SpriteRenderer>().sprite = incorrectShop;
+                hit.tag = "Shop";
             }
         }
         else
@@ -67,6 +79,7 @@ public class SwitchTiles : RaycastToTiles
             _rulesCheck.DecreaseStore(blockId, o);
             var tbc = GetRow();
             tbc.AddRange(GetColumn());
+            tbc.AddRange(GetDiagonalAdjacent());
             tbc.AddRange(_rulesCheck.CheckBlock(blockId) ? _rulesCheck.FilledBlock[blockId] : new List<GameObject>() { });
             foreach (var hit in tbc)
             {
@@ -77,5 +90,10 @@ public class SwitchTiles : RaycastToTiles
             _spriteRenderer.sprite = grass;
             
         }
+    }
+
+    private void CountMoves()
+    {
+        _movesCounter.MovesLeft();
     }
 }

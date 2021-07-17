@@ -17,7 +17,7 @@ public class MovesCounter : MonoBehaviour
         moves.text = movesLeft.ToString();
         if (movesLeft == -1)
         {
-            gameManager.GameOver();
+            gameManager.LevelFailed();
         }
     }
 }
