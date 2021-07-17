@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject[] gamebuttons;
     public Text lvlNo;
+    public GameObject levelWonPanel;
     public void Start()
     {
         nextScene = SceneManager.GetActiveScene().buildIndex + 1;
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
-    public void GameOver()
+    public void LevelFailed()
     {
         Time.timeScale = 0f;
         levelFailedPanel.SetActive(true);
@@ -68,6 +69,15 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
+    }
+
+    public void LevelWon()
+    {
+        Time.timeScale = 0f;
+        levelWonPanel.SetActive(true);
+        movesCounter.moves.gameObject.SetActive(false);
+        gamebuttons[0].SetActive(false);
+        gamebuttons[1].SetActive(false);
     }
 }
 

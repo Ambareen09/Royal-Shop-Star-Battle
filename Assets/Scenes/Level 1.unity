@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocks: 0000000000000000000000000000000000000000
+  counter: 0
 --- !u!114 &20403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moves: {fileID: 496953197}
-  movesLeft: 100
+  movesLeft: 30
   gameManager: {fileID: 1096819686}
 --- !u!4 &61153144 stripped
 Transform:
