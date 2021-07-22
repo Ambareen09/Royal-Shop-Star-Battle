@@ -8,10 +8,16 @@ public class GameManager : MonoBehaviour
     private MovesCounter movesCounter;
     public int nextScene;
     public GameObject levelFailedPanel;
+    
     public GameObject pausePanel;
     public GameObject[] gamebuttons;
     public Text lvlNo;
+    
     public GameObject levelWonPanel;
+    public GameObject tryAgainPanel;
+    public Text coins;
+
+    public Text coinsEarnedInthisLevel;
     public void Start()
     {
         nextScene = SceneManager.GetActiveScene().buildIndex + 1;
@@ -46,6 +52,7 @@ public class GameManager : MonoBehaviour
         movesCounter.moves.gameObject.SetActive(false);
         gamebuttons[0].SetActive(false);
         gamebuttons[1].SetActive(false);
+        gamebuttons[2].SetActive(false);
         
     }
 
@@ -69,6 +76,11 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
+        tryAgainPanel.SetActive(false);
+        movesCounter.moves.gameObject.SetActive(true);
+        gamebuttons[0].SetActive(true);
+        gamebuttons[1].SetActive(true);
+        gamebuttons[2].SetActive(true);
     }
 
     public void LevelWon()
@@ -78,6 +90,34 @@ public class GameManager : MonoBehaviour
         movesCounter.moves.gameObject.SetActive(false);
         gamebuttons[0].SetActive(false);
         gamebuttons[1].SetActive(false);
+        gamebuttons[2].SetActive(false);
+        CoinsCounter();
+    }
+
+    public void TryAgain()
+    {
+        Time.timeScale = 0f;
+        tryAgainPanel.SetActive(true);
+        movesCounter.moves.gameObject.SetActive(false);
+        gamebuttons[0].SetActive(false);
+        gamebuttons[1].SetActive(false);
+        gamebuttons[2].SetActive(false);
+    }
+
+    private void CoinsCounter()
+    {
+        if (movesCounter.movesLeft > 15)
+        {
+            //PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + 200);
+            coinsEarnedInthisLevel.text = 200.ToString();
+        } else
+        {
+            //PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + 100);
+            coinsEarnedInthisLevel.text = 100.ToString();
+        }
+        // coins.text = PlayerPrefs.GetInt("coins").ToString();
+        
+        
     }
 }
 

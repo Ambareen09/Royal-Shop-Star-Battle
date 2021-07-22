@@ -23,6 +23,7 @@ public class SwitchTiles : RaycastToTiles
     {
         ChangeSprite();
         CountMoves();
+        _rulesCheck.CheckforGameWon();
     }
 
     private void ChangeSprite()

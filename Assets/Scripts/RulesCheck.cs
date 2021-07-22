@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class RulesCheck : MonoBehaviour
 {
     public int[] blocks;
     public List<GameObject>[] FilledBlock = Enumerable.Range(0,5).Select((i)=>new List<GameObject>()).ToArray();
-    public int counter = 0;
     public GameManager gameManager;
     
     public bool CheckBlock(int blockId)
@@ -18,26 +18,27 @@ public class RulesCheck : MonoBehaviour
     {
         FilledBlock[blockId].Add(shop);
         blocks[blockId] += 1;
-        counter++;
     }
     
     public void DecreaseStore(int blockId, GameObject shop)
     {
         FilledBlock[blockId].Remove(shop);
         blocks[blockId] -= 1;
-        counter--;
     }
 
-    public void CheckforGameWon()
+    public async void CheckforGameWon()
     {
-        GameObject[] correctShops = GameObject.FindGameObjectsWithTag("CorrectShop");
-        if (correctShops.Length == blocks.Length)
+        var correctShops = GameObject.FindGameObjectsWithTag("CorrectShop");
+        if (correctShops.Length != blocks.Length)
+            return;
+
+        Debug.Log("Game Won :)");
+        await Task.Delay(2000);
+        gameManager.LevelWon();
+        /*else
         {
-            Debug.Log("Game Won :)");
-            gameManager.LevelWon();
-            
-        }
-            
-        
+            Debug.Log("Keep Trying :(");
+            gameManager.TryAgain();
+        } */
     }
 }
