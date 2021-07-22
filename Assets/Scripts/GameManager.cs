@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public Text coins;
 
     public Text coinsEarnedInthisLevel;
+    private int _coins;
     public void Start()
     {
         nextScene = SceneManager.GetActiveScene().buildIndex + 1;
@@ -109,15 +110,20 @@ public class GameManager : MonoBehaviour
         if (movesCounter.movesLeft > 15)
         {
             //PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + 200);
+            _coins = 200;
+            SaveSystem.Coins += _coins;
             coinsEarnedInthisLevel.text = 200.ToString();
         } else
         {
             //PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + 100);
+            _coins = 200;
+            SaveSystem.Coins += _coins;
             coinsEarnedInthisLevel.text = 100.ToString();
         }
-        // coins.text = PlayerPrefs.GetInt("coins").ToString();
-        
-        
+        SaveSystem.SavePlayer();
+        coins.text = SaveSystem.Coins.ToString();
+
+
     }
 }
 
