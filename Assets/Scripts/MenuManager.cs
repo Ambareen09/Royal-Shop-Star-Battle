@@ -7,7 +7,6 @@ public class MenuManager : MonoBehaviour
     public Text coins;
     private void Start()
     {
-        SaveSystem.LoadPlayer();
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         coins.text = SaveSystem.Coins.ToString();
     }
@@ -29,10 +28,4 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
         Debug.Log("App exited");
     }
-
-    public void DisplayCoins()
-    {
-        //coins.text = PlayerPrefs.GetInt("coins").ToString();
-    }
-    
 }

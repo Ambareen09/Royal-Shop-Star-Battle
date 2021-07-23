@@ -10,13 +10,14 @@ public class LevelHandler : MonoBehaviour
     public void Start()
     {
         
-        _levelAt = PlayerPrefs.GetInt("levelAt", 1);
+       // _levelAt = PlayerPrefs.GetInt("levelAt", 1);
+        _levelAt = SaveSystem.LevelAt;
         LockUnlockLevel();
     }
 
     private void LockUnlockLevel()
     {
-        for (var i = 0; i < levelButtons.Length; i++)
+        for (var i = 1; i < levelButtons.Length; i++)
         {
             if (i + 1 > _levelAt)
             {

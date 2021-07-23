@@ -1,6 +1,5 @@
 ﻿[System.Serializable]
 public class PlayerData
 {
-    public int coins;
+    public int coins, levelAt = 1;
 }
-

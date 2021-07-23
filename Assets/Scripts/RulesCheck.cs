@@ -35,10 +35,5 @@ public class RulesCheck : MonoBehaviour
         Debug.Log("Game Won :)");
         await Task.Delay(1000);
         gameManager.LevelWon();
-        /*else
-        {
-            Debug.Log("Keep Trying :(");
-            gameManager.TryAgain();
-        } */
     }
 }
