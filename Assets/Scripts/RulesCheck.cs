@@ -33,7 +33,7 @@ public class RulesCheck : MonoBehaviour
             return;
 
         Debug.Log("Game Won :)");
-        await Task.Delay(2000);
+        await Task.Delay(1000);
         gameManager.LevelWon();
         /*else
         {

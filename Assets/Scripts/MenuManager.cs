@@ -7,8 +7,9 @@ public class MenuManager : MonoBehaviour
     public Text coins;
     private void Start()
     {
+        SaveSystem.LoadPlayer();
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        coins.text = PlayerPrefs.GetInt("coins", 0).ToString();
+        coins.text = SaveSystem.Coins.ToString();
     }
     private void Update()
     {
@@ -31,7 +32,7 @@ public class MenuManager : MonoBehaviour
 
     public void DisplayCoins()
     {
-        coins.text = PlayerPrefs.GetInt("coins").ToString();
+        //coins.text = PlayerPrefs.GetInt("coins").ToString();
     }
     
 }
